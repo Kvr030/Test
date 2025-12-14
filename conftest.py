@@ -1,24 +1,27 @@
 import pytest
-from playwright.sync_api import Page
+from playwright.sync_api import sync_playwright
+from pages.footer import Footer
 
 
 @pytest.fixture(scope="session")
-def browser():
-    """Фикстура запускает браузер и создает страницу"""
-    from playwright.sync_api import sync_playwright
+def only_digital_page():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch()
         page = browser.new_page()
+        page.goto("https://only.digital/")
         yield page
         browser.close()
 
 
 @pytest.fixture(scope="session")
-def footer_on_main_page(browser: Page):
-    """Фикстура создает Footer и подготавливает страницу"""
-    from pages.footer import Footer
-    footer = Footer(browser)
-    footer.page.goto("https://only.digital/")
-    footer.footer.scroll_into_view_if_needed()
+def footer(only_digital_page):
+    return Footer(only_digital_page)
 
-    return footer
+# @pytest.fixture
+# def only_digital_page(page):
+#     page.goto("https://only.digital/")
+#     return page
+#
+# @pytest.fixture
+# def footer(only_digital_page):
+#     return Footer(only_digital_page)
