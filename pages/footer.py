@@ -5,31 +5,18 @@ class Footer:
     def __init__(self, page: Page):
         self.page = page
 
-        # Локаторы через XPath
-        self.footer = page.locator('//footer[contains(@class, "Footer_root")]')
+        # Футер
+        self.footer = page.locator("footer")
 
         # Кнопка "Начать проект"
-        self.start_project_button = page.locator(
-            '//button[contains(@class, "Footer_button__RHd0Q")]')
+        self.start_project_button = page.locator("footer").get_by_role("button", name= "Начать проект")
 
         # Конкретные социальные сети по href
-        self.behance_button = page.locator(
-            '//div[@class="Socials_socialsWrap__DPtp_ Footer_socials__C39yX"]//a[contains(@href, "behance")]'
-        )
-        self.dprofile_button = page.locator(
-            '//div[@class="Socials_socialsWrap__DPtp_ Footer_socials__C39yX"]//a[contains(@href, "dprofile")]'
-        )
-        self.telegram_button = page.locator(
-            '//div[@class="Socials_socialsWrap__DPtp_ Footer_socials__C39yX"]//a[contains(@href, "t.me")]'
-        )
-        self.vk_button = page.locator(
-            '//div[@class="Socials_socialsWrap__DPtp_ Footer_socials__C39yX"]//a[contains(@href, "vk.com")]'
-        )
+        self.behance_button = page.locator("footer").get_by_role("link", name="be")
+        self.dprofile_button = page.locator("footer").get_by_role("link", name="dp")
+        self.telegram_button = page.locator("footer").get_by_role("link", name="tg")
+        self.vk_button = page.locator("footer").get_by_role("link", name="vk")
 
         # Кнопки презентаций
-        self.pdf_button = page.locator(
-            '//div[@class="Documents_documentsWrap__iNfwU Footer_documents___mRvU"]//a[contains(@href, "pdf")]'
-        )
-        self.pitch_button = page.locator(
-            '//div[@class="Documents_documentsWrap__iNfwU Footer_documents___mRvU"]//a[contains(@href, "pitch")]'
-        )
+        self.pdf_button = page.locator("footer").get_by_role("link", name="pdf")
+        self.pitch_button = page.locator("footer").get_by_role("link", name="pitch")
